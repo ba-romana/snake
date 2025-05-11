@@ -4,7 +4,8 @@ body {
         }
 
         canvas {
-            border: 10px solid  #031527
+            border: 10px solid  #031527;
+            touch-action: none;
         }
 
         h1 {

@@ -7,9 +7,10 @@ document.querySelectorAll('input[type="radio"]').forEach(input =>
 let touchStartX = 0;
 let touchStartY = 0;
 document.addEventListener("touchstart", (event) => {
+    event.preventDefault();
     touchStartX = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
-}, false);
+}, { passive: false });
 
 document.addEventListener("touchend", (event) => {
     const touchEndX = event.changedTouches[0].clientX;
