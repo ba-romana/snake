@@ -8,10 +8,9 @@ Na projekte pracujem:
 - učíme sa gitovať! thumb up 👍🏽
 - AI-positive projekt, netvorím sama, kopírujem, nechávam si vysvetliť, analyzujem, učím sa
 - zrecyklovaný hadík ✔️
-- pridávam funkcie! aktuálne pridané **"Game styles": Easy a Fast and furious**
+- pridávam funkcie! aktuálne pridané **"Game styles": Easy a Fast and furious** a **Square mode**
 
 To be done:
-- Infinite a **Square mode** (had nie je duch. had je pevného skupenstva. cez stenu neprechádza. ani sa nevie teleportovať). zatiaľ je input hluchý a nepočuje ťa 🙉
 - zmením location.reload() pre ostatné klávesy tak, aby sa stránka nerefreshovala
 - a tiež chcem aby si zapamätala **highest score**
 - chcem aby bol had pekný a oblý 🐍
