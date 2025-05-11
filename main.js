@@ -53,6 +53,33 @@ startGame();
 
 //// ---------- /////
 
+//toto je hlavný cyklus
+function startGame() {
+    if (gameInterval) clearInterval(gameInterval);
+    gameInterval = setInterval(gameLoop, 1000/fps)
+}
+
+function gameOver() {
+    title.innerHTML = `<strong>☠ ${score} ☠</strong>`
+    gameIsRunning = false;
+}
+
+function gameOptions(event){
+    const velocitySelection = document.querySelector('.velocityStyle input[type="radio"]:checked');
+    const gameboardSelection = document.querySelector('.gameboardStyle input[type="radio"]:checked');
+
+    const velocityStyle = velocitySelection.value; // slow or fast
+        fps = 10;
+        gameSpeedMode = velocityStyle;
+
+    const gameboardStyle = gameboardSelection.value; //infinite or square
+
+    startGame();
+}
+
+
+//tu sa hýbeme
+
 function moveStuff(){            
     snakePosX += snakeSpeed * velocityX;
     snakePosY += snakeSpeed * velocityY;
@@ -84,7 +111,6 @@ function moveStuff(){
 
     //food collision
     
-    
     if (snakePosX === foodPosX && snakePosY === foodPosY){
         title.textContent = ++score;
         snakeLength++;
@@ -95,25 +121,6 @@ function moveStuff(){
             startGame();
         }
     }   
-}
-
-function drawStuff(){
-    rectangle('#123456', 0, 0, canvas.width, canvas.height);
-
-    drawGrid();
-
-    rectangle('yellow', foodPosX, foodPosY, tailSize, tailSize);
-
-    tail.forEach ( snakePart => 
-        rectangle('#555555', snakePart.x, snakePart.y, tailSize, tailSize)
-    )
-
-    rectangle('black', snakePosX, snakePosY, tailSize, tailSize);
-}
-
-function rectangle(color, x, y, width, height){
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, width, height);
 }
 
 function resetFood() {
@@ -134,16 +141,35 @@ function resetFood() {
 }
 
 
-function startGame() {
-    if (gameInterval) clearInterval(gameInterval);
-    gameInterval = setInterval(gameLoop, 1000/fps)
+// tu kreslíme
+function drawStuff(){
+    rectangle('#123456', 0, 0, canvas.width, canvas.height);
+
+    drawGrid();
+
+    rectangle('yellow', foodPosX, foodPosY, tailSize, tailSize);
+
+    tail.forEach ( snakePart => 
+        rectangle('#555555', snakePart.x, snakePart.y, tailSize, tailSize)
+    )
+
+    rectangle('black', snakePosX, snakePosY, tailSize, tailSize);
 }
 
-function gameOver() {
-    title.innerHTML = `<strong>☠ ${score} ☠</strong>`
-    gameIsRunning = false;
+function rectangle(color, x, y, width, height){
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, width, height);
 }
 
+function drawGrid(){
+        for (let i = 0; i < tileCountX; i++) {
+        for (let j = 0; j < tileCountY; j++) {
+        rectangle('#ffffff', tailSize * i, tailSize * j, tailSize -1, tailSize-1)
+        }
+    } 
+}
+
+// tu nastavujeme game controls
 function keyPush(event){
     switch(event.key) {
         case 'ArrowUp':
@@ -175,26 +201,4 @@ function keyPush(event){
             if (! gameIsRunning ) location.reload();
             break;
     }
-}
-
-function gameOptions(event){
-    const velocitySelection = document.querySelector('.velocityStyle input[type="radio"]:checked');
-    const gameboardSelection = document.querySelector('.gameboardStyle input[type="radio"]:checked');
-
-    const velocityStyle = velocitySelection.value; // slow or fast
-        fps = 10;
-        gameSpeedMode = velocityStyle;
-        startGame();
-
-    const gameboardStyle = gameboardSelection.value; //infinite or square
-
-    startGame();
-}
-
-function drawGrid(){
-        for (let i = 0; i < tileCountX; i++) {
-        for (let j = 0; j < tileCountY; j++) {
-        rectangle('#ffffff', tailSize * i, tailSize * j, tailSize -1, tailSize-1)
-        }
-    } 
 }
