@@ -22,7 +22,7 @@ document.addEventListener("touchend", (event) => {
         
 //canvas
 const canvas = document.querySelector('canvas');
-const title = document.querySelector('h1');
+const actualScore = document.querySelector('h1.score');
 const ctx = canvas.getContext('2d');
 
 //game 
@@ -77,8 +77,25 @@ function startGame() {
 }
 
 function gameOver() {
-    title.innerHTML = `<strong>☠ ${score} ☠</strong>`
+    actualScore.innerHTML = `<strong>☠ ${score} ☠</strong>`
     gameIsRunning = false;
+}
+
+function resetGame() {
+    snakePosX = 0;
+    snakePosY = canvas.height / 2;
+
+    velocityX = 0;
+    velocityY = 0;
+
+    tail = [];
+    snakeLength = 2;
+    score = 0;
+    actualScore.textContent = score;
+
+    gameIsRunning = true;
+    resetFood();
+    startGame();
 }
 
 function gameOptions(event){
@@ -136,7 +153,7 @@ function moveStuff(){
     //food collision
     
     if (snakePosX === foodPosX && snakePosY === foodPosY){
-        title.textContent = ++score;
+        actualScore.textContent = ++score;
         snakeLength++;
         resetFood();
 
@@ -221,8 +238,13 @@ function keyPush(event){
             }
             break;
 
+        case ' ':
+            if (!gameIsRunning) {
+            resetGame()
+            }
+            break;
+
         default: 
-            if (! gameIsRunning ) location.reload();
             break;
     }
 }

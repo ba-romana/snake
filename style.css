@@ -24,8 +24,16 @@ h1 {
     font-size:4em ;
     font-family: 'Avenir Next', Verdana;
     font-weight: bold;
+}
+
+h1.actualScore {
     margin-top: 0;
     letter-spacing: -10px;
+}
+
+h1.title {
+    margin-top: 10;
+    letter-spacing: -5px;
 }
 
 h1 strong {
@@ -41,6 +49,22 @@ h1 strong {
     flex-wrap: wrap;
     gap: 1rem;
     padding-bottom: 0.5rem;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem; 
+}
+
+.control-text {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  line-height: 0.2;
+  margin-left: 0.5rem;
 }
 
 .divider {
