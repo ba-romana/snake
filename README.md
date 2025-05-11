@@ -2,6 +2,8 @@
 
 ##Miniprojekt podľa [Skillmea](https://skillmea.sk/student/online-kurzy/rob-hry-v-javascripte).  
 
+[HRA DOSTUPNÁ TU!!!](https://ba-romana.github.io/snake/)
+
 Na projekte pracujem: 
 - učíme sa gitovať! thumb up 👍🏽
 - AI-positive projekt, netvorím sama, kopírujem, nechávam si vysvetliť, analyzujem, učím sa
