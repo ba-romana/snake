@@ -27,9 +27,36 @@
             display: inline-block;
             margin: 0 0.25em
         }
+
+        .gameOptions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .divider {
+            padding: 0 0.5rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    
+    <h2>Game style</h2>
+    <div class="gameOptions">
+        <form class="velocityStyle" action="">
+            <input type="radio" name="velocity" id="style1" value="slow" checked> <label for="style1">Easy</label>
+            <input type="radio" name="velocity" id="style2" value="fast"> <label for="style2">Fast and furious</label>
+        </form>
+        <span class="divider">|</span>
+        <form class="gameboardStyle" action="">
+            <input type="radio" name="gameboard" id="style1" value="infinite" checked> <label for="style1">Infinite</label>
+            <input type="radio" name="gameboard" id="style2" value="square"> <label for="style2">Square</label>
+        </form>
+    </div>
+
     <canvas width="600" height="600"></canvas>
 
     <h1>0</h1>
@@ -37,6 +64,9 @@
     <script>
         // listeners
         document.addEventListener('keydown', keyPush)
+        document.querySelectorAll('input[type="radio"]').forEach(input =>
+            input.addEventListener('change', gameOptions)
+        )
         
         
         //canvas
@@ -47,13 +77,20 @@
         //game 
 
         let gameIsRunning = true;
+        let gameSpeedMode = "slow";
 
-        const fps = 15;
+        let fps = 10;
+        let gameInterval;
+
         const tailSize = 50;
         const tileCountX = canvas.width / tailSize;
         const tileCountY = canvas.height / tailSize;
 
         let score = 0;
+
+        //style
+        
+
 
         //player
         let snakeSpeed = tailSize;
@@ -75,14 +112,14 @@
         function gameLoop() {
             if (gameIsRunning) {
                 drawStuff();
-                moveStuff();
-                setTimeout(gameLoop, 1000/fps); 
+                moveStuff(); 
             }
 
 
         };
 
         resetFood();
+        startGame();
         gameLoop(); 
 
         function moveStuff(){            
@@ -115,13 +152,18 @@
             tail = tail.slice (-1*snakeLength)
  
             //food collision
+            
+            
             if (snakePosX === foodPosX && snakePosY === foodPosY){
                 title.textContent = ++score;
                 snakeLength++;
-                resetFood()
-            };   
+                resetFood();
 
-        
+                if (gameSpeedMode === "fast") {
+                    fps+=1;
+                    startGame();
+                }
+            }   
         }
 
         function drawStuff(){
@@ -160,6 +202,12 @@
             };
         }
 
+
+        function startGame() {
+            if (gameInterval) clearInterval(gameInterval);
+            gameInterval = setInterval(gameLoop, 1000/fps)
+        }
+
         function gameOver() {
             title.innerHTML = `<strong>☠ ${score} ☠</strong>`
             gameIsRunning = false;
@@ -196,6 +244,20 @@
                     if (! gameIsRunning ) location.reload();
                     break;
             }
+        }
+
+        function gameOptions(event){
+            const velocitySelection = document.querySelector('.velocityStyle input[type="radio"]:checked');
+            const gameboardSelection = document.querySelector('.gameboardStyle input[type="radio"]:checked');
+
+            const velocityStyle = velocitySelection.value; // slow or fast
+                fps = 10;
+                gameSpeedMode = velocityStyle;
+                startGame();
+
+            const gameboardStyle = gameboardSelection.value; //infinite or square
+
+            startGame();
         }
 
         function drawGrid(){
