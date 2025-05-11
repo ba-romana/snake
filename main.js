@@ -46,13 +46,10 @@ function gameLoop() {
         drawStuff();
         moveStuff(); 
     }
-
-
 };
 
 resetFood();
-startGame();
-gameLoop(); 
+startGame(); 
 
 //// ---------- /////
 
