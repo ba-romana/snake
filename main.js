@@ -13,6 +13,7 @@ const ctx = canvas.getContext('2d');
 
 let gameIsRunning = true;
 let gameSpeedMode = "slow";
+let gameboardMode = "infinite";
 
 let fps = 10;
 let gameInterval;
@@ -73,6 +74,7 @@ function gameOptions(event){
         gameSpeedMode = velocityStyle;
 
     const gameboardStyle = gameboardSelection.value; //infinite or square
+        gameboardMode = gameboardStyle;
 
     startGame();
 }
@@ -86,16 +88,20 @@ function moveStuff(){
 
     //wall collision
     if (snakePosX > (canvas.width - tailSize)) {
-        snakePosX = 0
+        if (gameboardMode === "square") {gameOver();}
+        else {snakePosX = 0}
     }
     if (snakePosX < 0) {
-        snakePosX = canvas.width
+        if (gameboardMode === "square") {gameOver();}
+        else {snakePosX = canvas.width}
     }
     if (snakePosY > (canvas.height - tailSize)) {
-        snakePosY = 0
+        if (gameboardMode === "square") {gameOver();}
+        else {snakePosY = 0}
     }
     if (snakePosY < 0) {
-        snakePosY = canvas.height
+        if (gameboardMode === "square") {gameOver();}
+        else {snakePosY = canvas.height}
     }
 
     if (velocityX !== 0 || velocityY !== 0) {
