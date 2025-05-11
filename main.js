@@ -2,7 +2,22 @@
 document.addEventListener('keydown', keyPush)
 document.querySelectorAll('input[type="radio"]').forEach(input =>
     input.addEventListener('change', gameOptions)
-)        
+) 
+
+let touchStartX = 0;
+let touchStartY = 0;
+document.addEventListener("touchstart", (event) => {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+}, false);
+
+document.addEventListener("touchend", (event) => {
+    const touchEndX = event.changedTouches[0].clientX;
+    const touchEndY = event.changedTouches[0].clientY;
+
+    swipePush(touchStartX, touchStartY, touchEndX, touchEndY);
+}, false);
+
         
 //canvas
 const canvas = document.querySelector('canvas');
@@ -206,5 +221,30 @@ function keyPush(event){
         default: 
             if (! gameIsRunning ) location.reload();
             break;
+    }
+}
+
+function swipePush(startX, startY, endX, endY) {
+    const diffX = endX - startX;
+    const diffY = endY - startY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // vodorovný pohyb
+        if (diffX > 30 && velocityX !== -1) {
+            velocityX = 1;
+            velocityY = 0;
+        } else if (diffX < -30 && velocityX !== 1) {
+            velocityX = -1;
+            velocityY = 0;
+        }
+    } else {
+        // zvislý pohyb
+        if (diffY > 30 && velocityY !== -1) {
+            velocityX = 0;
+            velocityY = 1;
+        } else if (diffY < -30 && velocityY !== 1) {
+            velocityX = 0;
+            velocityY = -1;
+        }
     }
 }
