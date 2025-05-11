@@ -82,6 +82,8 @@ function gameOver() {
 }
 
 function gameOptions(event){
+    document.activeElement.blur();
+
     const velocitySelection = document.querySelector('.velocityStyle input[type="radio"]:checked');
     const gameboardSelection = document.querySelector('.gameboardStyle input[type="radio"]:checked');
 
