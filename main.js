@@ -2,8 +2,7 @@
 document.addEventListener('keydown', keyPush)
 document.querySelectorAll('input[type="radio"]').forEach(input =>
     input.addEventListener('change', gameOptions)
-)
-        
+)        
         
 //canvas
 const canvas = document.querySelector('canvas');
@@ -39,6 +38,7 @@ let snakeLength = 2;
 let foodPosX = 0;
 let foodPosY = 0;
 
+//// ---------- /////
 
 //loop
 function gameLoop() {
@@ -53,6 +53,8 @@ function gameLoop() {
 resetFood();
 startGame();
 gameLoop(); 
+
+//// ---------- /////
 
 function moveStuff(){            
     snakePosX += snakeSpeed * velocityX;
