@@ -1,36 +1,49 @@
 body {
-            background: #1b4875;
-            text-align: center;
-        }
+    background: #1b4875;
+    text-align: center;
+    overflow-x: hidden;
+    margin: 0;
+}
 
-        canvas {
-            border: 10px solid  #031527;
-            touch-action: none;
-        }
+*{
+box-sizing: border-box;
+}
 
-        h1 {
-            font-size:4em ;
-            font-family: 'Avenir Next', Verdana;
-            font-weight: bold;
-            margin-top: 0;
-            letter-spacing: -10px;
-        }
+canvas {
+    width: 95vmin;
+    height: 95vmin;
+    max-width: 600px;
+    max-height: 600px;
+    display: block;
+    margin: 0 auto;
+    border: 10px solid  #031527;
+    touch-action: none;
+}
 
-        h1 strong {
-            font-size: 1.35em;
-            display: inline-block;
-            margin: 0 0.25em
-        }
+h1 {
+    font-size:4em ;
+    font-family: 'Avenir Next', Verdana;
+    font-weight: bold;
+    margin-top: 0;
+    letter-spacing: -10px;
+}
 
-        .gameOptions {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding-bottom: 0.5rem;
-        }
+h1 strong {
+    font-size: 1.35em;
+    display: inline-block;
+    margin: 0 0.25em
+}
 
-        .divider {
-            padding: 0 0.5rem;
-            font-weight: bold;
-        }
+.gameOptions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.divider {
+    padding: 0 0.5rem;
+    font-weight: bold;
+}
