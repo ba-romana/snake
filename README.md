@@ -7,4 +7,10 @@ Na projekte pracujem:
 - AI-positive projekt, netvorím sama, kopírujem, nechávam si vysvetliť, analyzujem, učím sa
 - zrecyklovaný hadík ✔️
 - pridávam funkcie! aktuálne pridané **"Game styles": Easy a Fast and furious**
-- to be done: Infinite a Square mode. zatiaľ je input hluchý a nepočuje ťa 🙉
+
+To be done:
+- Infinite a **Square mode** (had nie je duch. had je pevného skupenstva. cez stenu neprechádza. ani sa nevie teleportovať). zatiaľ je input hluchý a nepočuje ťa 🙉
+- zmením location.reload() pre ostatné klávesy tak, aby sa stránka nerefreshovala
+- a tiež chcem aby si zapamätala **highest score**
+- chcem aby bol had pekný a oblý 🐍
+- start game/pause game button?
