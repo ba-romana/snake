@@ -212,6 +212,10 @@ function drawGrid(){
 
 // tu nastavujeme game controls
 function keyPush(event){
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(event.key)) {
+        event.preventDefault();
+    }
+
     switch(event.key) {
         case 'ArrowUp':
             if (velocityY !== 1) {
