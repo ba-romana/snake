@@ -92,6 +92,8 @@ function resetGame() {
     velocityX = 0;
     velocityY = 0;
 
+    fps = 10;
+
     tail = [];
     snakeLength = 2;
     score = 0;
