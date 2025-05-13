@@ -6,7 +6,7 @@ document.querySelectorAll('input[type="radio"]').forEach(input =>
 
 let touchStartX = 0;
 let touchStartY = 0;
-document.addEventListener("touchstart", (event) => {
+document.querySelector('canvas').addEventListener("touchstart", (event) => {
     event.preventDefault();
     touchStartX = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
@@ -25,7 +25,7 @@ const tryReset = () => {
 };
 
 restartButton.addEventListener('click', tryReset);
-restartButton.addEventListener('touchstart', tryReset);
+restartButton.addEventListener('touchend', tryReset);
 
         
 //canvas

@@ -5,16 +5,21 @@ body {
     overflow-y: auto;
     margin: 0;
     padding: 0;
+    padding-top: 1rem;
     font-family: 'Avenir Next', sans-serif;
 }
 
+.start-again {
+  cursor: pointer;
+}
+
 *{
-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 canvas {
-    width: 90vmin;
-    height: 90vmin;
+    width: 80vmin;
+    height: 80vmin;
     max-width: 600px;
     max-height: 600px;
     display: block;
