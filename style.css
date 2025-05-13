@@ -1,82 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-    background: #1b4875;
-    text-align: center;
-    overflow-x: hidden;
-    overflow-y: auto;
-    margin: 0;
-    padding: 0;
-    padding-top: 1rem;
-    font-family: 'Avenir Next', sans-serif;
-}
-
-.start-again {
-  cursor: pointer;
-}
-
-*{
-    box-sizing: border-box;
-}
-
-canvas {
-    width: 80vmin;
-    height: 80vmin;
-    max-width: 600px;
-    max-height: 600px;
-    display: block;
-    margin: 0 auto;
-    border: 10px solid  #031527;
-    touch-action: none;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Avenir Next', sans-serif;
+  background: #1b4875;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
 }
 
 h1 {
-    font-size:4em ;
-    font-family: 'Avenir Next', Verdana;
-    font-weight: bold;
+  font-size: 4em;
+  font-family: 'Avenir Next', Verdana;
+  font-weight: bold;
+  margin: 0.5em 0;
+  letter-spacing: -5px;
 }
 
 h1.actualScore {
-    margin-top: 0;
-    letter-spacing: -10px;
-}
-
-h1.title {
-    margin-top: 10;
-    letter-spacing: -5px;
+  letter-spacing: -10px;
 }
 
 h1 strong {
-    font-size: 1.35em;
-    display: inline-block;
-    margin: 0 0.25em
+  font-size: 1.35em;
+  display: inline-block;
+  margin: 0 0.25em;
+}
+
+canvas {
+  width: 80vmin;
+  height: 80vmin;
+  max-width: 600px;
+  max-height: 600px;
+  display: block;
+  margin: 1rem auto;
+  border: 10px solid #031527;
+  touch-action: none;
 }
 
 .gameOptions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2rem; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .control-text {
   display: flex;
-  text-align: left;
   flex-direction: column;
-  line-height: 0.2;
+  text-align: left;
+  line-height: 1.3;
   margin-left: 0.5rem;
 }
 
+.control-text p {
+  margin: 0.25rem 0;
+}
+
 .divider {
-    padding: 0 0.5rem;
-    font-weight: bold;
+  padding: 0 0.5rem;
+  font-weight: bold;
+}
+
+.start-again {
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-top: 1rem;
 }
