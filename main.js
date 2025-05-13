@@ -19,9 +19,13 @@ document.addEventListener("touchend", (event) => {
     swipePush(touchStartX, touchStartY, touchEndX, touchEndY);
 }, false);
 
-document.querySelector('.start-again').addEventListener ('click', () => {if (!gameIsRunning) {
-            resetGame()
-            }})
+const restartButton = document.querySelector('.start-again');
+const tryReset = () => {
+  if (!gameIsRunning) resetGame();
+};
+
+restartButton.addEventListener('click', tryReset);
+restartButton.addEventListener('touchstart', tryReset);
 
         
 //canvas
