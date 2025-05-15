@@ -19,7 +19,7 @@ document.addEventListener("touchend", (event) => {
     swipePush(touchStartX, touchStartY, touchEndX, touchEndY);
 }, false);
 
-const restartButton = document.querySelector('.start-again');
+const restartButton = document.querySelector('canvas');
 const tryReset = () => {
   if (!gameIsRunning) resetGame();
 };
@@ -63,6 +63,11 @@ let snakeLength = 2;
 let foodPosX = 0;
 let foodPosY = 0;
 
+//game over
+let showGameOverText = true;
+let blinkCount = 0;
+let blinkInterval;
+
 //// ---------- /////
 
 //loop
@@ -87,7 +92,20 @@ function startGame() {
 function gameOver() {
     actualScore.innerHTML = `<strong>☠ ${score} ☠</strong>`
     gameIsRunning = false;
-    
+
+    showGameOverText = true;
+    blinkCount = 0;
+
+    blinkInterval = setInterval(() => {
+        showGameOverText = !showGameOverText;
+        blinkCount++;
+
+        if (blinkCount >= 6) { 
+            clearInterval(blinkInterval);
+            showGameOverText = true; 
+        }
+    }, 300);
+        
 }
 
 function resetGame() {
@@ -208,7 +226,7 @@ function drawStuff(){
 
         rectangle('black', snakePosX, snakePosY, tailSize, tailSize);
     }
-    if (!gameIsRunning) {
+    if (!gameIsRunning && showGameOverText) {
         ctx.fillStyle = "black";
         ctx.font = "bold 150px 'Avenir Next', sans-serif";
         ctx.textAlign = "center";
@@ -216,6 +234,9 @@ function drawStuff(){
 
         ctx.fillText("GAME", canvas.width / 2, canvas.height / 2 - 60);
         ctx.fillText("OVER", canvas.width / 2, canvas.height / 2 + 60);
+
+        ctx.font = "bold 40px 'Avenir Next', sans-serif";
+        ctx.fillText("Tap to restart", canvas.width / 2, canvas.height / 2 + 200);
     }
 }
 
