@@ -67,8 +67,8 @@ let foodPosY = 0;
 
 //loop
 function gameLoop() {
+    drawStuff();
     if (gameIsRunning) {
-        drawStuff();
         moveStuff(); 
     }
 };
@@ -87,6 +87,7 @@ function startGame() {
 function gameOver() {
     actualScore.innerHTML = `<strong>☠ ${score} ☠</strong>`
     gameIsRunning = false;
+    
 }
 
 function resetGame() {
@@ -198,13 +199,24 @@ function drawStuff(){
 
     drawGrid();
 
-    rectangle('yellow', foodPosX, foodPosY, tailSize, tailSize);
+    if (gameIsRunning) {
+        rectangle('yellow', foodPosX, foodPosY, tailSize, tailSize);
 
-    tail.forEach ( snakePart => 
-        rectangle('#555555', snakePart.x, snakePart.y, tailSize, tailSize)
-    )
+        tail.forEach(snakePart =>
+            rectangle('#555555', snakePart.x, snakePart.y, tailSize, tailSize)
+        );
 
-    rectangle('black', snakePosX, snakePosY, tailSize, tailSize);
+        rectangle('black', snakePosX, snakePosY, tailSize, tailSize);
+    }
+    if (!gameIsRunning) {
+        ctx.fillStyle = "black";
+        ctx.font = "bold 150px 'Avenir Next', sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        ctx.fillText("GAME", canvas.width / 2, canvas.height / 2 - 60);
+        ctx.fillText("OVER", canvas.width / 2, canvas.height / 2 + 60);
+    }
 }
 
 function rectangle(color, x, y, width, height){
