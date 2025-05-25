@@ -228,53 +228,57 @@ function resetFood() {
 
 // tu kreslíme
 function drawStuff(){
-    rectangle('#123456', 0, 0, canvas.width, canvas.height);
+    drawRectangle('#123456', 0, 0, canvas.width, canvas.height);
 
     drawGrid();
 
     if (gameIsRunning) {
-        rectangle('yellow', foodPosX, foodPosY, tailSize, tailSize);
+        drawRectangle('yellow', foodPosX, foodPosY, tailSize, tailSize);
 
         tail.forEach(snakePart =>
-            rectangle('#555555', snakePart.x, snakePart.y, tailSize, tailSize)
+            drawRectangle('#555555', snakePart.x, snakePart.y, tailSize, tailSize)
         );
 
-        rectangle('black', snakePosX, snakePosY, tailSize, tailSize);
+        drawRectangle('black', snakePosX, snakePosY, tailSize, tailSize);
     }
     if (!gameIsRunning && showGameOverText) {
-        ctx.fillStyle = "black";
-        ctx.textAlign = "right";
-        ctx.textBaseline = "top";
-        ctx.font = "bold 20px 'Avenir Next', sans-serif";
-
-        ctx.fillText(`Your score: ${score}`, canvas.width - 20, 20);
-        ctx.fillText(`Best score: ${bestScore}`, canvas.width - 20, 50);
-
-        ctx.fillStyle = "black";
-        ctx.font = "bold 150px 'Avenir Next', sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        ctx.fillText("GAME", canvas.width / 2, canvas.height / 2 - 60);
-        ctx.fillText("OVER", canvas.width / 2, canvas.height / 2 + 60);
-
-        ctx.font = "bold 40px 'Avenir Next', sans-serif";
-        ctx.fillText("Tap to restart", canvas.width / 2, canvas.height / 2 + 200);
+        drawGameOver();
     }
-}
+};
 
-function rectangle(color, x, y, width, height){
+function drawRectangle(color, x, y, width, height){
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
-}
+};
+
+function drawGameOver(){
+    ctx.fillStyle = "black";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "top";
+    ctx.font = "bold 20px 'Avenir Next', sans-serif";
+
+    ctx.fillText(`Your score: ${score}`, canvas.width - 20, 20);
+    ctx.fillText(`Best score: ${bestScore}`, canvas.width - 20, 50);
+
+    ctx.fillStyle = "black";
+    ctx.font = "bold 150px 'Avenir Next', sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    ctx.fillText("GAME", canvas.width / 2, canvas.height / 2 - 60);
+    ctx.fillText("OVER", canvas.width / 2, canvas.height / 2 + 60);
+
+    ctx.font = "bold 40px 'Avenir Next', sans-serif";
+    ctx.fillText("Tap to restart", canvas.width / 2, canvas.height / 2 + 200);
+};
 
 function drawGrid(){
         for (let i = 0; i < tileCountX; i++) {
         for (let j = 0; j < tileCountY; j++) {
-        rectangle('#ffffff', tailSize * i, tailSize * j, tailSize -1, tailSize-1)
+        drawRectangle('#ffffff', tailSize * i, tailSize * j, tailSize -1, tailSize-1)
         }
     } 
-}
+};
 
 // tu nastavujeme game controls
 function keyPush(event){
@@ -317,7 +321,7 @@ function keyPush(event){
         default: 
             break;
     }
-}
+};
 
 function swipePush(startX, startY, endX, endY) {
     const diffX = endX - startX;
