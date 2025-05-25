@@ -55,7 +55,7 @@ const storedBestScore = localStorage.getItem("bestScore");
 if (storedBestScore !== null) {
   bestScore = Number(storedBestScore);
 }
-actualBestScore.innerHTML = bestScore;
+actualBestScore.innerHTML = "Best score: " + bestScore;
 
 //player
 let snakeSpeed = tailSize;
@@ -104,7 +104,7 @@ function gameOver() {
         bestScore = score;
         localStorage.setItem("bestScore", bestScore);
     }
-    actualBestScore.innerHTML = bestScore;
+    actualBestScore.innerHTML = "Best score:" + bestScore;
 
     gameIsRunning = false;
 
@@ -242,6 +242,14 @@ function drawStuff(){
         rectangle('black', snakePosX, snakePosY, tailSize, tailSize);
     }
     if (!gameIsRunning && showGameOverText) {
+        ctx.fillStyle = "black";
+        ctx.textAlign = "right";
+        ctx.textBaseline = "top";
+        ctx.font = "bold 20px 'Avenir Next', sans-serif";
+
+        ctx.fillText(`Your score: ${score}`, canvas.width - 20, 20);
+        ctx.fillText(`Best score: ${bestScore}`, canvas.width - 20, 50);
+
         ctx.fillStyle = "black";
         ctx.font = "bold 150px 'Avenir Next', sans-serif";
         ctx.textAlign = "center";
