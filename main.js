@@ -33,6 +33,7 @@ const canvas = document.querySelector('canvas');
 const actualScore = document.querySelector('h1.score');
 const actualBestScore = document.querySelector('h2.bestScore');
 const ctx = canvas.getContext('2d');
+let foodEmoji = "🍩"
 
 //game 
 
@@ -233,7 +234,7 @@ function drawStuff(){
     drawGrid();
 
     if (gameIsRunning) {
-        drawRectangle('yellow', foodPosX, foodPosY, tailSize, tailSize);
+        drawFood(foodEmoji);
 
         tail.forEach(snakePart =>
             drawRectangle('#555555', snakePart.x, snakePart.y, tailSize, tailSize)
@@ -249,6 +250,13 @@ function drawStuff(){
 function drawRectangle(color, x, y, width, height){
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
+};
+
+function drawFood(emoji){
+    ctx.font = `${tailSize-10}px sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(emoji, foodPosX + tailSize / 2, foodPosY + tailSize / 2);
 };
 
 function drawGameOver(){
