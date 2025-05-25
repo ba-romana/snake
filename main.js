@@ -31,6 +31,7 @@ restartButton.addEventListener('touchend', tryReset);
 //canvas
 const canvas = document.querySelector('canvas');
 const actualScore = document.querySelector('h1.score');
+const actualBestScore = document.querySelector('h2.bestScore');
 const ctx = canvas.getContext('2d');
 
 //game 
@@ -46,7 +47,15 @@ const tailSize = 50;
 const tileCountX = canvas.width / tailSize;
 const tileCountY = canvas.height / tailSize;
 
+//score 
+
 let score = 0;
+let bestScore = 0;
+const storedBestScore = localStorage.getItem("bestScore");
+if (storedBestScore !== null) {
+  bestScore = Number(storedBestScore);
+}
+actualBestScore.innerHTML = bestScore;
 
 //player
 let snakeSpeed = tailSize;
@@ -91,6 +100,12 @@ function startGame() {
 
 function gameOver() {
     actualScore.innerHTML = `<strong>☠ ${score} ☠</strong>`
+    if (score>bestScore) {
+        bestScore = score;
+        localStorage.setItem("bestScore", bestScore);
+    }
+    actualBestScore.innerHTML = bestScore;
+
     gameIsRunning = false;
 
     showGameOverText = true;
