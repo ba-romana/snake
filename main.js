@@ -1,8 +1,16 @@
 // listeners
-document.addEventListener('keydown', keyPush)
 document.querySelectorAll('input[type="radio"]').forEach(input =>
     input.addEventListener('change', gameOptions)
-) 
+); 
+
+document.addEventListener('keydown', keyPush)
+document.querySelector('.game-controls').addEventListener('click', function (event) {
+  const id = event.target.id;
+  if (id === 'arrow-up') changeDirection('up');
+  if (id === 'arrow-down') changeDirection('down');
+  if (id === 'arrow-left') changeDirection('left');
+  if (id === 'arrow-right') changeDirection('right');
+});
 
 let touchStartX = 0;
 let touchStartY = 0;
@@ -19,13 +27,12 @@ document.addEventListener("touchend", (event) => {
     swipePush(touchStartX, touchStartY, touchEndX, touchEndY);
 }, false);
 
-const restartButton = document.querySelector('canvas');
+const restart = document.querySelector('canvas');
 const tryReset = () => {
   if (!gameIsRunning) resetGame();
 };
 
-restartButton.addEventListener('click', tryReset);
-restartButton.addEventListener('touchend', tryReset);
+restart.addEventListener('click', tryReset);
 
         
 //canvas
@@ -41,7 +48,8 @@ let gameIsRunning = true;
 let gameSpeedMode = "slow";
 let gameboardMode = "infinite";
 
-let fps = 10;
+const defaultFps = 8;
+let fps = defaultFps;
 let gameInterval;
 
 const tailSize = 50;
@@ -131,7 +139,7 @@ function resetGame() {
     velocityX = 0;
     velocityY = 0;
 
-    fps = 10;
+    fps = defaultFps;
 
     tail = [];
     snakeLength = 2;
@@ -150,7 +158,7 @@ function gameOptions(event){
     const gameboardSelection = document.querySelector('.gameboardStyle input[type="radio"]:checked');
 
     const velocityStyle = velocitySelection.value; // slow or fast
-        fps = 10;
+        fps = defaultFps;
         gameSpeedMode = velocityStyle;
 
     const gameboardStyle = gameboardSelection.value; //infinite or square
@@ -202,8 +210,8 @@ function moveStuff(){
         snakeLength++;
         resetFood();
 
-        if (gameSpeedMode === "fast") {
-            fps+=1;
+        if (gameSpeedMode === "fast" && fps < 20) {
+            fps += 0.25;
             startGame();
         }
     }   
@@ -289,46 +297,63 @@ function drawGrid(){
 };
 
 // tu nastavujeme game controls
+
+function changeDirection(direction) {
+  switch (direction) {
+    case 'up':
+      if (velocityY !== 1) {
+        velocityX = 0;
+        velocityY = -1;
+      }
+      break;
+    case 'down':
+      if (velocityY !== -1) {
+        velocityX = 0;
+        velocityY = 1;
+      }
+      break;
+    case 'left':
+      if (velocityX !== 1) {
+        velocityX = -1;
+        velocityY = 0;
+      }
+      break;
+    case 'right':
+      if (velocityX !== -1) {
+        velocityX = 1;
+        velocityY = 0;
+      }
+      break;
+  }
+};
+
 function keyPush(event){
+    const key = event.key.toLowerCase();
     if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(event.key)) {
         event.preventDefault();
     }
 
-    switch(event.key) {
-        case 'ArrowUp':
-            if (velocityY !== 1) {
-            velocityX = 0;
-            velocityY = -1;
-            }
-            break;
-        case 'ArrowDown':
-            if (velocityY !== -1) {
-            velocityX = 0;
-            velocityY = 1;
-            }
-            break;
-        case 'ArrowLeft':
-            if (velocityX !== 1) {
-            velocityX = -1;
-            velocityY = 0;
-            }
-            break;        
-        case 'ArrowRight':
-            if (velocityX !== -1) {
-            velocityX = 1;
-            velocityY = 0;
-            }
-            break;
-
-        case ' ':
-            if (!gameIsRunning) {
-            resetGame()
-            }
-            break;
-
-        default: 
-            break;
-    }
+    switch (key) {
+    case 'arrowup':
+    case 'w':
+      changeDirection('up');
+      break;
+    case 'arrowdown':
+    case 's':
+      changeDirection('down');
+      break;
+    case 'arrowleft':
+    case 'a':
+      changeDirection('left');
+      break;
+    case 'arrowright':
+    case 'd':
+      changeDirection('right');
+      break;
+    case ' ':
+      if (!gameIsRunning) resetGame();
+      break;
+  }
 };
 
 function swipePush(startX, startY, endX, endY) {
@@ -336,22 +361,11 @@ function swipePush(startX, startY, endX, endY) {
     const diffY = endY - startY;
 
     if (Math.abs(diffX) > Math.abs(diffY)) {
-        // vodorovný pohyb
-        if (diffX > 30 && velocityX !== -1) {
-            velocityX = 1;
-            velocityY = 0;
-        } else if (diffX < -30 && velocityX !== 1) {
-            velocityX = -1;
-            velocityY = 0;
-        }
-    } else {
-        // zvislý pohyb
-        if (diffY > 30 && velocityY !== -1) {
-            velocityX = 0;
-            velocityY = 1;
-        } else if (diffY < -30 && velocityY !== 1) {
-            velocityX = 0;
-            velocityY = -1;
-        }
+        if (diffX > 30) changeDirection('right');
+        else if (diffX < -30) changeDirection('left');
+    } 
+    else {
+        if (diffY > 30) changeDirection('down');
+        else if (diffY < -30) changeDirection('up');
     }
-}
+};

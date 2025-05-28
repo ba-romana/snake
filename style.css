@@ -50,34 +50,46 @@ canvas {
   padding-bottom: 0.5rem;
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.control-text {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  line-height: 1.3;
-  margin-left: 0.5rem;
-}
-
-.control-text p {
-  margin: 0.25rem 0;
-}
-
-.divider {
-  padding: 0 0.5rem;
-  font-weight: bold;
-}
-
 .start-again {
   cursor: pointer;
   font-size: 1.1rem;
   margin-top: 1rem;
+}
+
+/* Game controls - tlačidlá so šípkami pre mobily */
+.game-controls {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .game-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .game-controls .row {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .game-controls .arrow {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .game-controls .arrow:active {
+    background-color: #ccc;
+  }
 }
