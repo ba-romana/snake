@@ -5,12 +5,14 @@ document.querySelectorAll('input[type="radio"]').forEach(input =>
 
 document.addEventListener('keydown', keyPush)
 document.querySelector('.game-controls').addEventListener('click', function (event) {
-  const id = event.target.id;
-  if (id === 'arrow-up') changeDirection('up');
-  if (id === 'arrow-down') changeDirection('down');
-  if (id === 'arrow-left') changeDirection('left');
-  if (id === 'arrow-right') changeDirection('right');
-});
+    event.preventDefault();
+
+    const id = event.target.id;
+    if (id === 'arrow-up') changeDirection('up');
+    if (id === 'arrow-down') changeDirection('down');
+    if (id === 'arrow-left') changeDirection('left');
+    if (id === 'arrow-right') changeDirection('right');
+}, { passive: false });
 
 let touchStartX = 0;
 let touchStartY = 0;
