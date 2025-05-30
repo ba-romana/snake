@@ -40,7 +40,8 @@ const canvas = document.querySelector('canvas');
 const actualScore = document.querySelector('h1.score');
 const actualBestScore = document.querySelector('h2.bestScore');
 const ctx = canvas.getContext('2d');
-let foodEmoji = "🍩"
+const foodOptions = ["🍩","🍏","🍕","🥐","🥩"];
+let foodEmoji = foodOptions[(Math.random() * foodOptions.length) | 0];
 
 //game 
 
@@ -224,6 +225,7 @@ function resetFood() {
 
     foodPosX = Math.floor(Math.random() * tileCountX) * tailSize;
     foodPosY = Math.floor(Math.random() * tileCountY) * tailSize;
+    foodEmoji = foodOptions[Math.floor(Math.random() * foodOptions.length)];
 
     if (foodPosX ===snakePosX && foodPosY === snakePosY ) {
         resetFood();
