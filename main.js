@@ -35,6 +35,7 @@ const tryReset = () => {
 };
 
 restart.addEventListener('click', tryReset);
+restart.addEventListener('touchend', tryReset);
 
         
 //canvas
@@ -42,7 +43,8 @@ const canvas = document.querySelector('canvas');
 const actualScore = document.querySelector('h1.score');
 const actualBestScore = document.querySelector('h2.bestScore');
 const ctx = canvas.getContext('2d');
-const foodOptions = ["🍩","🍏","🍕","🥐","🥩"];
+
+const foodOptions = ["🍏","🍎","🍌","🍊","🥑","🥦","🥩","🥚","🧀","🍕","🍟","🍔","🍝","🥙","🧁","🍫","🍩","🥐","🍦"];
 let foodEmoji = foodOptions[(Math.random() * foodOptions.length) | 0];
 
 //game 
