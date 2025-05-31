@@ -57,6 +57,7 @@ let foodEmoji = foodOptions[(Math.random() * foodOptions.length) | 0];
 //game 
 
 let gameIsRunning = true;
+let swipeLocked = false;
 let gameSpeedMode = "slow";
 let gameboardMode = "infinite";
 
@@ -370,7 +371,6 @@ function keyPush(event){
 };
 
 function swipePush(startX, startY, endX, endY) {
-    let swipeLocked = false;
     const diffX = endX - startX;
     const diffY = endY - startY;
 

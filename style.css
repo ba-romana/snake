@@ -77,6 +77,14 @@ canvas {
   }
 
   .game-controls .arrow {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
     width: 60px;
     height: 60px;
     font-size: 2rem;
@@ -91,5 +99,9 @@ canvas {
 
   .game-controls .arrow:active {
     background-color: #ccc;
+  }
+
+  .game-controls .arrow:focus {
+  outline: none;
   }
 }
