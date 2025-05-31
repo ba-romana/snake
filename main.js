@@ -4,7 +4,7 @@ document.querySelectorAll('input[type="radio"]').forEach(input =>
 ); 
 
 document.addEventListener('keydown', keyPush)
-document.querySelector('.game-controls').addEventListener('click', function (event) {
+document.querySelector('.game-controls').addEventListener('pointerdown', function (event) {
     event.preventDefault();
 
     const id = event.target.id;
@@ -12,6 +12,8 @@ document.querySelector('.game-controls').addEventListener('click', function (eve
     if (id === 'arrow-down') changeDirection('down');
     if (id === 'arrow-left') changeDirection('left');
     if (id === 'arrow-right') changeDirection('right');
+
+    swipeLocked = true;
 }, { passive: false });
 
 let touchStartX = 0;
@@ -23,6 +25,11 @@ document.querySelector('canvas').addEventListener("touchstart", (event) => {
 }, { passive: false });
 
 document.addEventListener("touchend", (event) => {
+    if (swipeLocked) {
+        swipeLocked = false;
+        return;
+    }
+
     const touchEndX = event.changedTouches[0].clientX;
     const touchEndY = event.changedTouches[0].clientY;
 
@@ -363,6 +370,7 @@ function keyPush(event){
 };
 
 function swipePush(startX, startY, endX, endY) {
+    let swipeLocked = false;
     const diffX = endX - startX;
     const diffY = endY - startY;
 
